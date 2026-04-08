@@ -1,234 +1,166 @@
-🚀Employee Attendance and Leave Management System
+# 🚀 Employee Attendance and Leave Management System
 
-A modern, responsive, and scalable web-based Attendance and Leave Management System built using Angular 20. This application enables efficient tracking, management, and reporting of employee attendance and leave workflows for organizations and institutions.
+A fully functional web-based Employee Attendance and Leave Management System built using Angular. This project focuses on providing a structured and scalable solution to manage employee attendance records, leave workflows, and administrative approvals through a modern UI.
 
-📑 Table of Contents
+---
 
-- Overview
-- Features
-- Tech Stack
-- Prerequisites
-- Installation
-- Development
-- Building for Production
-- Testing
-- Project Structure
-- Code Scaffolding
-- Configuration
-- Challenges Faced
-- Future Enhancements
+## 📌 Overview
 
-📌 Overview
+This project was developed as part of coursework (CIA 3) and enhanced through multiple iterations involving debugging, UI improvements, and feature extensions.
 
-The Employee Attendance and Leave Management System is a lightweight and user-friendly web application designed to streamline attendance tracking and leave management processes.
+The application simulates a real-world system where organizations can:
+- track attendance
+- manage employee data
+- process leave requests
+- monitor overall activity via a dashboard
 
-Developed as part of academic coursework (CIA 3), this project demonstrates real-world application of Angular concepts including routing, modular architecture, form validation, and UI integration.
+---
 
-This system is suitable for:
+## ✨ Core Features
 
-- Educational institutions (schools, colleges, universities)
-- Corporate organizations
-- Training centers and workshops
-- Any organization requiring centralized attendance tracking
+### 🧩 Functional Modules
+- Employee Management (Add / View / Manage employees)
+- Attendance Tracker (Mark & monitor attendance)
+- Leave Request System (Submit leave requests)
+- Leave Approval Workflow (Approve / Reject requests)
+- Dashboard Overview (Summary of activities)
 
- ✨ Features
+---
 
-Core Functionalities
-- 👩‍💼 Employee Management System
-- 📅 Attendance Tracking and Recording
-- 📝 Leave Request Submission
-- ✅ Leave Approval and Rejection System
-- 📊 Dashboard for Overview and Insights
+### ⚙️ Technical Features
+- Angular Routing with Guards
+- Reactive Forms with Validation
+- Modular Component Architecture
+- Angular Material UI Integration
+- REST-based mock backend using JSON Server
+- Real-time UI updates via Angular change detection
 
-Technical Features
-- 🔄 Routing with Angular Guards
-- 🔐 Form Validation and Error Handling
-- 📱 Fully Responsive UI (Desktop + Mobile)
-- ⚡ Real-time Updates with Angular Data Binding
-- 🗂️ CRUD Operations for Data Management
-- 🎨 UI built with Angular Material
+---
 
-🛠️ Tech Stack
+## 🛠️ Tech Stack
 
-| Technology        | Purpose                        | Version |
-|------------------|--------------------------------|--------|
-| Angular          | Frontend Framework             | 20.x   |
-| TypeScript       | Programming Language           | Latest |
-| HTML5            | Markup                         | -      |
-| SCSS / CSS       | Styling                        | -      |
-| Angular CLI      | Development & Build Tool       | 20.x   |
-| JSON Server      | Mock Backend API               | -      |
+| Technology        | Role                         |
+|------------------|------------------------------|
+| Angular          | Frontend Framework           |
+| TypeScript       | Application Logic            |
+| HTML / SCSS      | UI & Styling                 |
+| Angular Material | UI Components                |
+| JSON Server      | Mock Backend API             |
 
-📊 Language Distribution
+---
 
-- TypeScript: ~65–70%
-- SCSS: ~15%
-- HTML: ~10–12%
-- CSS: ~5–8%
-
-⚙️ Prerequisites
-
-Ensure the following tools are installed:
-
-- Node.js (v18.x or higher recommended)
-- npm (v9.x or higher)
-- Angular CLI (v20.x)
-- A modern browser (Chrome, Firefox, Edge)
-
-Verify Installation:
+## ⚙️ Setup & Installation
+### 1. Clone the repository
 
 
-📦 Installation
-1. Clone the Repository
+2. Install dependencies
 Bash
-
-git clone https://github.com/ChanchalVora/attendance-management.git
-cd attendance-management
-
-
-2. Install Dependencies
-Bash
-
 npm install
 
-
-💻 Development
-Start Development Server
+3. Run Angular app
 Bash
-
 ng serve
-or
 
+4. Start mock backend
 Bash
+npx json-server --watch db.json --port 3000
 
-npm start
-Access Application
-
+5. Open in browser
 http://localhost:4200
-Development Workflow
-Modify code inside src/
 
-Browser auto-refreshes on changes
+🔧 Key Implementation Details
 
-Check console for errors
+🔹 Routing Configuration
+TypeScript
+const routes: Routes = [
+  { path: '', component: DashboardComponent },
+  { path: 'employees', component: EmployeeListComponent },
+  { path: 'attendance', component: AttendanceTrackerComponent },
+  { path: 'leave-request', component: LeaveRequestComponent },
+  { path: 'leave-approval', component: LeaveApprovalComponent }
+];
 
-Use Angular DevTools for debugging
+🔹 Example Service (API Handling)
+TypeScript
 
-⚡ Hot Module Replacement (HMR)
-Changes reflect instantly without full reload, improving development speed and efficiency.
+@Injectable({ providedIn: 'root' })
+export class EmployeeService {
+  private baseUrl = 'http://localhost:3000/employees';
 
-🏗️ Building for Production
-Build Application
-Bash
+  constructor(private http: HttpClient) {}
 
-ng build
-Optimized Build
-Bash
+  getEmployees() {
+    return this.http.get(this.baseUrl);
+  }
 
-ng build --configuration production
-Build Output
-Stored in dist/
+  addEmployee(employee: any) {
+    return this.http.post(this.baseUrl, employee);
+  }
+}
+🔹 Angular Material Usage
+HTML
+<mat-form-field appearance="outline">
+  <mat-label>Employee Name</mat-label>
+  <input matInput [(ngModel)]="employee.name" required>
+</mat-form-field>
 
-Optimized for:
-
-Performance (minification)
-
-Speed (tree-shaking)
-
-Reduced bundle size
-
-🧪 Testing
-Unit Testing
-Bash
-
-ng test
-Code Coverage
-Bash
-
-ng test --code-coverage
-End-to-End Testing
-Bash
-
-ng e2e
-Supported frameworks:
-
-Cypress
-
-Playwright
 
 📁 Project Structure
 
-attendance-management/
-├── src/
-│   ├── app/
-│   │   ├── components/
-│   │   ├── services/
-│   │   ├── models/
-│   │   ├── guards/
-│   │   └── app.module.ts
-│   ├── assets/
-│   ├── environments/
-│   └── styles/
-├── public/
-├── angular.json
-├── package.json
-├── tsconfig.json
-└── README.md
-⚙️ Code Scaffolding
-Generate Angular components and services:
-⚙️ Code Scaffolding
-Generate Angular components and services:
+src/
+ ├── app/
+ │   ├── components/
+ │   ├── services/
+ │   ├── models/
+ │   ├── guards/
+ │   └── app.module.ts
+ ├── assets/
+ ├── environments/
+ └── styles/
 
+
+⚡ Development Insights
+This project involved solving several real-world Angular issues:
+Fixing router-outlet not rendering components
+Handling Zone.js configuration errors (NG0908)
+Debugging template binding errors
+Managing dependency conflicts in Angular versions
+Ensuring proper module imports for Angular Material
+
+🧪 Testing
 Bash
+ng test
+ng test --code-coverage
+🚧 Challenges Faced
+Angular configuration conflicts during setup
 
-ng generate component component-name
-ng generate service service-name
-ng generate module module-name
-🔧 Configuration
-Angular Configuration (angular.json)
-Defines:
+Routing issues causing blank pages
 
-Build settings
+Dependency mismatches (Angular + Zone.js)
 
-Assets
+Handling form validation edge cases
 
-Styles
+Debugging UI rendering issues
 
-Entry points
+🔮 Future Improvements
+Authentication & Login system
 
-Environment Configuration
-TypeScript
+Role-based access (Admin / Employee)
 
-// environment.ts
-export const environment = {
-  production: false,
-  apiUrl: 'http://localhost:3000'
-};
-⚡ Challenges Faced
-Angular build configuration issues (Zone.js, builder errors)
+Backend integration (Node.js / Firebase)
 
-Routing and navigation bugs
+Advanced analytics dashboard
 
-Dependency conflicts and version mismatches
-
-Template errors and module import issues
-
-Debugging runtime UI issues (non-loading components)
-
-🔮 Future Enhancements
-🔐 Authentication & Login System
-
-👥 Role-Based Access Control
-
-📊 Advanced Dashboard Analytics
-
-🌐 Backend Integration (Node.js / Firebase)
-
-📱 Enhanced Mobile Responsiveness
+Improved UI/UX responsiveness
 
 👩‍💻 Author
 Chanchal Vora
-B.Tech IT | Frontend Developer | Problem Solver
+B.Tech IT Student
+Frontend Developer | Problem Solver
 
-⭐ Support
-If you found this project useful, consider giving it a ⭐ on GitHub!
+⭐ Final Note
+This project reflects hands-on experience with Angular development, debugging, and building structured frontend applications.
+
+```bash
+git clone https://github.com/chanchalvora11-crypto/attendance-management.git
+cd attendance-management
