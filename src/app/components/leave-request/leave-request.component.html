@@ -1,0 +1,90 @@
+<div class="leave-request-container">
+  <mat-card class="form-card">
+    <mat-card-title>Submit Leave Request</mat-card-title>
+    <mat-card-content>
+      <div class="placeholder-note">
+        Form submission is disabled for this assignment. The fields below are read-only placeholders.
+      </div>
+
+      <mat-form-field class="full-width" appearance="outline">
+        <mat-label>Employee</mat-label>
+        <mat-select disabled placeholder="Select employee">
+          <mat-option *ngFor="let employee of employees" [value]="employee.id">
+            {{ employee.name }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field class="full-width" appearance="outline">
+        <mat-label>From Date</mat-label>
+        <input matInput disabled placeholder="yyyy-mm-dd" />
+      </mat-form-field>
+
+      <mat-form-field class="full-width" appearance="outline">
+        <mat-label>To Date</mat-label>
+        <input matInput disabled placeholder="yyyy-mm-dd" />
+      </mat-form-field>
+
+      <mat-form-field class="full-width" appearance="outline">
+        <mat-label>Reason</mat-label>
+        <textarea matInput disabled placeholder="Reason for leave" rows="3"></textarea>
+      </mat-form-field>
+
+      <button mat-raised-button color="primary" disabled>
+        Submit Request (Disabled)
+      </button>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card class="table-card">
+    <mat-card-title>Your Leave Requests</mat-card-title>
+    <mat-card-content>
+      <table mat-table [dataSource]="leaveRequests" class="leave-table">
+        <!-- Employee ID Column -->
+        <ng-container matColumnDef="employeeId">
+          <th mat-header-cell *matHeaderCellDef>Employee ID</th>
+          <td mat-cell *matCellDef="let element">{{ element.employeeId }}</td>
+        </ng-container>
+
+        <!-- Employee Name Column -->
+        <ng-container matColumnDef="employeeName">
+          <th mat-header-cell *matHeaderCellDef>Employee Name</th>
+          <td mat-cell *matCellDef="let element">{{ getEmployeeName(element.employeeId) }}</td>
+        </ng-container>
+
+        <!-- From Date Column -->
+        <ng-container matColumnDef="fromDate">
+          <th mat-header-cell *matHeaderCellDef>From Date</th>
+          <td mat-cell *matCellDef="let element">{{ element.fromDate }}</td>
+        </ng-container>
+
+        <!-- To Date Column -->
+        <ng-container matColumnDef="toDate">
+          <th mat-header-cell *matHeaderCellDef>To Date</th>
+          <td mat-cell *matCellDef="let element">{{ element.toDate }}</td>
+        </ng-container>
+
+        <!-- Reason Column -->
+        <ng-container matColumnDef="reason">
+          <th mat-header-cell *matHeaderCellDef>Reason</th>
+          <td mat-cell *matCellDef="let element">{{ element.reason }}</td>
+        </ng-container>
+
+        <!-- Status Column -->
+        <ng-container matColumnDef="status">
+          <th mat-header-cell *matHeaderCellDef>Status</th>
+          <td mat-cell *matCellDef="let element">
+            <mat-chip-set aria-label="Status">
+              <mat-chip [color]="getStatusColor(element.status)" [highlighted]="element.status !== 'Pending'">
+                {{ element.status }}
+              </mat-chip>
+            </mat-chip-set>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+    </mat-card-content>
+  </mat-card>
+</div>

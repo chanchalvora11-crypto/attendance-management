@@ -1,0 +1,70 @@
+.app-toolbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+}
+
+.app-title {
+  margin-left: 16px;
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.sidenav-container {
+  position: fixzed;
+  top: 64px;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: calc(100% - 64px);
+}
+
+.sidenav {
+  width: 240px;
+  background-color: #f5f5f5;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+}
+
+mat-nav-list {
+  padding: 0;
+}
+
+.nav-button {
+  width: 100%;
+  text-align: left;
+  padding: 12px 16px;
+  min-height: 56px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  border-radius: 0;
+}
+
+.nav-button mat-icon {
+  font-size: 24px;
+  width: 24px;
+  height: 24px;
+  line-height: 24px;
+}
+
+.nav-button:hover {
+  background-color: #e0e0e0;
+}
+
+.nav-button:focus {
+  background-color: #e8e8e8;
+}
+
+mat-list-item {
+  height: auto !important;
+  padding: 0 !important;
+}
+
+.content {
+  margin-top: 0;
+  overflow-y: auto;
+}

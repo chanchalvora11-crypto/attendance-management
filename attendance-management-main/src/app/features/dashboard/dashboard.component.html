@@ -1,0 +1,43 @@
+<div class="dashboard-container">
+  <h1>Dashboard</h1>
+
+  <div class="actions">
+    <button mat-raised-button color="primary" routerLink="/employees">
+      View Employees
+    </button>
+<button mat-raised-button color="accent" routerLink="/attendance">
+  Mark Attendance
+</button>
+
+
+    <button mat-raised-button routerLink="/leave/request">
+      Apply Leave
+    </button>
+
+    <button mat-raised-button color="warn" routerLink="/leave/approval">
+      Leave Approval
+    </button>
+  </div>
+
+  <div class="cards">
+    <mat-card>
+      <mat-card-title>Total Employees</mat-card-title>
+      <mat-card-content>{{ totalEmployees }}</mat-card-content>
+    </mat-card>
+
+    <mat-card>
+      <mat-card-title>Present Today</mat-card-title>
+      <mat-card-content>{{ presentCount }}</mat-card-content>
+    </mat-card>
+
+    <mat-card>
+      <mat-card-title>Absent Today</mat-card-title>
+      <mat-card-content>{{ absentCount }}</mat-card-content>
+    </mat-card>
+
+    <mat-card>
+      <mat-card-title>Pending Leaves</mat-card-title>
+      <mat-card-content>{{ pendingLeaves }}</mat-card-content>
+    </mat-card>
+  </div>
+</div>

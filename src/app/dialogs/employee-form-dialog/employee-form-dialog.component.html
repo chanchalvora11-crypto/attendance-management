@@ -1,0 +1,29 @@
+<h2 mat-dialog-title>{{ isEdit ? 'Edit Employee' : 'Add New Employee' }}</h2>
+
+<mat-dialog-content>
+  <mat-form-field class="full-width">
+    <mat-label>Name</mat-label>
+    <input matInput [(ngModel)]="name" name="name" placeholder="Employee name" />
+  </mat-form-field>
+
+  <mat-form-field class="full-width">
+    <mat-label>Department</mat-label>
+    <mat-select [(ngModel)]="department" name="department" placeholder="Select department">
+      <mat-option *ngFor="let dept of departments" [value]="dept">{{ dept }}</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field class="full-width">
+    <mat-label>Role</mat-label>
+    <mat-select [(ngModel)]="role" name="role">
+      <mat-option *ngFor="let role of roles" [value]="role">{{ role }}</mat-option>
+    </mat-select>
+  </mat-form-field>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button (click)="onCancel()">Cancel</button>
+  <button mat-raised-button color="primary" (click)="onSubmit()" [disabled]="!name || !department">
+    {{ isEdit ? 'Update' : 'Add' }}
+  </button>
+</mat-dialog-actions>

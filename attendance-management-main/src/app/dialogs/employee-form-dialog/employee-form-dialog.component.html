@@ -1,0 +1,66 @@
+<h2 mat-dialog-title>{{ isEdit ? 'Edit Employee' : 'Add New Employee' }}</h2>
+
+<mat-dialog-content>
+  <form #employeeForm="ngForm">
+    <mat-form-field class="full-width" appearance="outline">
+      <mat-label>Full Name</mat-label>
+      <input matInput [(ngModel)]="employee.name" name="name" #name="ngModel" required placeholder="Enter full name">
+      <mat-error *ngIf="name.invalid && name.touched">Name is required</mat-error>
+    </mat-form-field>
+
+    <div class="form-row">
+      <mat-form-field appearance="outline">
+        <mat-label>Email Address</mat-label>
+        <input matInput [(ngModel)]="employee.email" name="email" #email="ngModel" required email
+          placeholder="email@example.com">
+        <mat-error *ngIf="email.invalid && email.touched">
+          <span *ngIf="email.errors?.['required']">Email is required</span>
+          <span *ngIf="email.errors?.['email']">Invalid email format</span>
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Phone Number</mat-label>
+        <input matInput [(ngModel)]="employee.phone" name="phone" #phone="ngModel" required minlength="10"
+          placeholder="10-digit number">
+        <mat-error *ngIf="phone.invalid && phone.touched">
+          <span *ngIf="phone.errors?.['required']">Phone is required</span>
+          <span *ngIf="phone.errors?.['minlength']">Minimum 10 digits required</span>
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="form-row">
+      <mat-form-field appearance="outline">
+        <mat-label>Department</mat-label>
+        <mat-select [(ngModel)]="employee.department" name="department" #dept="ngModel" required>
+          <mat-option *ngFor="let dept of departments" [value]="dept">{{dept}}</mat-option>
+        </mat-select>
+        <mat-error *ngIf="dept.invalid && dept.touched">Department is required</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Role</mat-label>
+        <mat-select [(ngModel)]="employee.role" name="role" #role="ngModel" required>
+          <mat-option *ngFor="let role of roles" [value]="role">{{role}}</mat-option>
+        </mat-select>
+        <mat-error *ngIf="role.invalid && role.touched">Role is required</mat-error>
+      </mat-form-field>
+    </div>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Join Date</mat-label>
+      <input matInput [matDatepicker]="picker" [(ngModel)]="employee.joinDate" name="joinDate" #date="ngModel" required>
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+      <mat-error *ngIf="date.invalid && date.touched">Join date is required</mat-error>
+    </mat-form-field>
+  </form>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button (click)="onCancel()">Cancel</button>
+  <button mat-raised-button color="primary" (click)="onSubmit()" [disabled]="employeeForm.invalid">
+    {{ isEdit ? 'Update' : 'Add' }}
+  </button>
+</mat-dialog-actions>

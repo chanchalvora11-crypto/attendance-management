@@ -1,0 +1,103 @@
+<div class="leave-container">
+  <mat-card class="form-card">
+    <mat-card-header>
+      <mat-card-title>Apply for Leave</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <form [formGroup]="leaveForm" (ngSubmit)="onSubmit()">
+        <div class="date-row">
+          <mat-form-field appearance="outline">
+            <mat-label>From Date</mat-label>
+            <input matInput [matDatepicker]="fromPicker" formControlName="fromDate" required>
+            <mat-datepicker-toggle matSuffix [for]="fromPicker"></mat-datepicker-toggle>
+            <mat-datepicker #fromPicker></mat-datepicker>
+            <mat-error *ngIf="leaveForm.get('fromDate')?.invalid && leaveForm.get('fromDate')?.touched">
+              Start date is required
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>To Date</mat-label>
+            <input matInput [matDatepicker]="toPicker" formControlName="toDate" required>
+            <mat-datepicker-toggle matSuffix [for]="toPicker"></mat-datepicker-toggle>
+            <mat-datepicker #toPicker></mat-datepicker>
+            <mat-error *ngIf="leaveForm.get('toDate')?.invalid && leaveForm.get('toDate')?.touched">
+              End date is required
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Leave Type</mat-label>
+          <mat-select formControlName="type" required>
+            <mat-option *ngFor="let type of leaveTypes" [value]="type">{{ type }}</mat-option>
+          </mat-select>
+          <mat-error *ngIf="leaveForm.get('type')?.invalid && leaveForm.get('type')?.touched">
+            Type is required
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Reason</mat-label>
+          <textarea matInput formControlName="reason" rows="3" placeholder="Explain why you need leave..."
+            required></textarea>
+          <mat-error *ngIf="leaveForm.get('reason')?.invalid && leaveForm.get('reason')?.touched">
+            <span *ngIf="leaveForm.get('reason')?.errors?.['required']">Reason is required</span>
+            <span *ngIf="leaveForm.get('reason')?.errors?.['minlength']">Minimum 10 characters required</span>
+          </mat-error>
+        </mat-form-field>
+
+        <button mat-raised-button color="primary" type="submit" [disabled]="leaveForm.invalid">
+          Submit Leave Request
+        </button>
+      </form>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card class="table-card">
+    <mat-card-header>
+      <mat-card-title>My Leave History</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <table mat-table [dataSource]="myRequests" class="mat-elevation-z1">
+        <ng-container matColumnDef="appliedOn">
+          <th mat-header-cell *matHeaderCellDef>Applied On</th>
+          <td mat-cell *matCellDef="let element">{{ element.appliedOn | date }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="fromDate">
+          <th mat-header-cell *matHeaderCellDef>From</th>
+          <td mat-cell *matCellDef="let element">{{ element.fromDate | date }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="toDate">
+          <th mat-header-cell *matHeaderCellDef>To</th>
+          <td mat-cell *matCellDef="let element">{{ element.toDate | date }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="type">
+          <th mat-header-cell *matHeaderCellDef>Type</th>
+          <td mat-cell *matCellDef="let element">{{ element.type }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="reason">
+          <th mat-header-cell *matHeaderCellDef>Reason</th>
+          <td mat-cell *matCellDef="let element">{{ element.reason }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="status">
+          <th mat-header-cell *matHeaderCellDef>Status</th>
+          <td mat-cell *matCellDef="let element">
+            <span [appHighlightStatus]="element.status" class="status-badge">{{ element.status }}</span>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+      <div *ngIf="myRequests.length === 0" class="no-data" style="padding: 20px; text-align: center;">
+        You haven't applied for any leaves yet.
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>
