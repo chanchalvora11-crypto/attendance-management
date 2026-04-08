@@ -1,166 +1,265 @@
-# 🚀 Employee Attendance and Leave Management System
+# Attendance Management System
 
-A fully functional web-based Employee Attendance and Leave Management System built using Angular. This project focuses on providing a structured and scalable solution to manage employee attendance records, leave workflows, and administrative approvals through a modern UI.
+A modern, responsive web-based attendance management application built with Angular. This system enables efficient tracking and management of attendance records and leave workflows for educational institutions or organizations.
 
----
+## Table of Contents
 
-## 📌 Overview
+- Overview
+- Features
+- Tech Stack
+- Prerequisites
+- Installation
+- Development
+- Building for Production
+- Testing
+- Project Structure
+- Code Scaffolding
+- Configuration
+- Challenges Faced
 
-This project was developed as part of coursework (CIA 3) and enhanced through multiple iterations involving debugging, UI improvements, and feature extensions.
+## Overview
 
-The application simulates a real-world system where organizations can:
-- track attendance
-- manage employee data
-- process leave requests
-- monitor overall activity via a dashboard
+The Attendance Management System is a lightweight and user-friendly application designed to streamline the process of recording, tracking, and managing attendance and leave requests.
+This project was developed as part of coursework (CIA 3) and later improved by fixing multiple Angular configuration issues, routing bugs, and UI inconsistencies.
 
----
+It demonstrates practical implementation of Angular concepts such as routing, modular architecture, form validation, and API integration.
 
-## ✨ Core Features
+This application is suitable for:
+- Educational institutions (schools, colleges, universities)
+- Corporate organizations
+- Training centers and workshops
+- Any entity requiring centralized attendance tracking
 
-### 🧩 Functional Modules
-- Employee Management (Add / View / Manage employees)
-- Attendance Tracker (Mark & monitor attendance)
+## Features
+
+### Functional Features
+
+- Employee Management (Add, view, and manage employee data)
+- Attendance Tracking (Mark and monitor attendance records)
 - Leave Request System (Submit leave requests)
-- Leave Approval Workflow (Approve / Reject requests)
-- Dashboard Overview (Summary of activities)
+- Leave Approval Workflow (Approve or reject requests)
+- Dashboard (Overview of attendance and leave activity)
 
 ---
 
-### ⚙️ Technical Features
+### Technical Features
+
 - Angular Routing with Guards
 - Reactive Forms with Validation
 - Modular Component Architecture
 - Angular Material UI Integration
 - REST-based mock backend using JSON Server
-- Real-time UI updates via Angular change detection
+- Real-time UI updates using Angular data binding
+- CRUD operations for data handling
 
 ---
 
-## 🛠️ Tech Stack
+## Tech Stack
 
-| Technology        | Role                         |
-|------------------|------------------------------|
-| Angular          | Frontend Framework           |
-| TypeScript       | Application Logic            |
-| HTML / SCSS      | UI & Styling                 |
-| Angular Material | UI Components                |
-| JSON Server      | Mock Backend API             |
+The project uses modern web technologies:
+
+| Technology        | Purpose                        | Version |
+|------------------|--------------------------------|--------|
+| Angular          | Frontend Framework             | 20.x   |
+| TypeScript       | Programming Language           | Latest |
+| SCSS             | Styling                        | -      |
+| HTML5            | Markup                         | -      |
+| Angular CLI      | Development & Build Tool       | 20.x   |
+| JSON Server      | Mock Backend API               | -      |
 
 ---
 
-## ⚙️ Setup & Installation
-### 1. Clone the repository
+## Prerequisites
 
+Before you begin, ensure you have the following installed:
 
-2. Install dependencies
-Bash
-npm install
+- Node.js (v18.x or higher recommended)
+- npm (v9.x or higher)
+- Angular CLI
+- A modern web browser
 
-3. Run Angular app
-Bash
-ng serve
+### Verify Installation
 
-4. Start mock backend
-Bash
-npx json-server --watch db.json --port 3000
+```bash
+node --version
+npm --version
+ng version
+````
 
-5. Open in browser
-http://localhost:4200
+---
 
-🔧 Key Implementation Details
+## Installation
 
-🔹 Routing Configuration
-TypeScript
-const routes: Routes = [
-  { path: '', component: DashboardComponent },
-  { path: 'employees', component: EmployeeListComponent },
-  { path: 'attendance', component: AttendanceTrackerComponent },
-  { path: 'leave-request', component: LeaveRequestComponent },
-  { path: 'leave-approval', component: LeaveApprovalComponent }
-];
-
-🔹 Example Service (API Handling)
-TypeScript
-
-@Injectable({ providedIn: 'root' })
-export class EmployeeService {
-  private baseUrl = 'http://localhost:3000/employees';
-
-  constructor(private http: HttpClient) {}
-
-  getEmployees() {
-    return this.http.get(this.baseUrl);
-  }
-
-  addEmployee(employee: any) {
-    return this.http.post(this.baseUrl, employee);
-  }
-}
-🔹 Angular Material Usage
-HTML
-<mat-form-field appearance="outline">
-  <mat-label>Employee Name</mat-label>
-  <input matInput [(ngModel)]="employee.name" required>
-</mat-form-field>
-
-
-📁 Project Structure
-
-src/
- ├── app/
- │   ├── components/
- │   ├── services/
- │   ├── models/
- │   ├── guards/
- │   └── app.module.ts
- ├── assets/
- ├── environments/
- └── styles/
-
-
-⚡ Development Insights
-This project involved solving several real-world Angular issues:
-Fixing router-outlet not rendering components
-Handling Zone.js configuration errors (NG0908)
-Debugging template binding errors
-Managing dependency conflicts in Angular versions
-Ensuring proper module imports for Angular Material
-
-🧪 Testing
-Bash
-ng test
-ng test --code-coverage
-🚧 Challenges Faced
-Angular configuration conflicts during setup
-
-Routing issues causing blank pages
-
-Dependency mismatches (Angular + Zone.js)
-
-Handling form validation edge cases
-
-Debugging UI rendering issues
-
-🔮 Future Improvements
-Authentication & Login system
-
-Role-based access (Admin / Employee)
-
-Backend integration (Node.js / Firebase)
-
-Advanced analytics dashboard
-
-Improved UI/UX responsiveness
-
-👩‍💻 Author
-Chanchal Vora
-B.Tech IT Student
-Frontend Developer | Problem Solver
-
-⭐ Final Note
-This project reflects hands-on experience with Angular development, debugging, and building structured frontend applications.
+### Clone the Repository
 
 ```bash
 git clone https://github.com/chanchalvora11-crypto/attendance-management.git
 cd attendance-management
+```
+
+### Install Dependencies
+
+```bash
+npm install
+```
+
+---
+
+## Development
+
+### Start Development Server
+
+```bash
+ng serve
+```
+
+or
+
+```bash
+npm start
+```
+
+### Access the Application
+
+```
+http://localhost:4200/
+```
+
+### Development Workflow
+
+* Make changes in the `src/` directory
+* The application reloads automatically
+* Check console for errors
+* Use Angular DevTools for debugging
+
+---
+
+## Building for Production
+
+To build the project for production:
+
+```bash
+ng build --configuration production
+```
+
+### Build Output
+
+* Stored in the `dist/` folder
+* Optimized for:
+
+  * Performance (minification)
+  * Speed (tree-shaking)
+  * Reduced bundle size
+
+---
+
+## Testing
+
+### Unit Testing
+
+```bash
+ng test
+```
+
+### Code Coverage
+
+```bash
+ng test --code-coverage
+```
+
+---
+
+## Project Structure
+
+```
+attendance-management/
+├── src/
+│   ├── app/
+│   │   ├── components/
+│   │   ├── services/
+│   │   ├── models/
+│   │   ├── guards/
+│   │   └── app.module.ts
+│   ├── assets/
+│   ├── styles/
+│   └── environments/
+├── public/
+├── angular.json
+├── package.json
+├── tsconfig.json
+└── README.md
+```
+
+---
+
+## Code Scaffolding
+
+Angular CLI provides tools to generate components and services:
+
+```bash
+ng generate component component-name
+ng generate service service-name
+ng generate module module-name
+```
+
+---
+
+## Configuration
+
+### Angular Configuration
+
+Defined in `angular.json`, including:
+
+* Build settings
+* Assets
+* Styles
+* Entry points
+
+---
+
+### Environment Configuration
+
+```ts
+export const environment = {
+  production: false,
+  apiUrl: 'http://localhost:3000'
+};
+```
+
+---
+
+## Challenges Faced
+
+During development, several real-world issues were encountered and resolved:
+
+* Angular configuration errors (Zone.js, builder issues)
+* Routing issues causing blank or unresponsive pages
+* Dependency conflicts between Angular versions
+* Template binding and module import errors
+* Debugging UI rendering issues
+
+---
+
+## Future Improvements
+
+* Authentication and Login system
+* Role-based access control
+* Advanced dashboard analytics
+* Backend integration (Node.js / Firebase)
+* Improved mobile responsiveness
+
+---
+
+## Author
+
+**Chanchal Vora**
+B.Tech IT Student
+Frontend Developer
+
+---
+
+## ⭐ Note
+
+This project reflects practical experience with Angular development, debugging, and building structured frontend applications.
+
+If you find it useful, consider giving it a ⭐ on GitHub.
